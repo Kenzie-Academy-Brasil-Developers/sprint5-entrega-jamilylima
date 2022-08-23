@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
+import 'reflect-metadata'
 
 /* Explicando código abaixo:
   * Estamos utilizando um ternário para controlar a configuração
@@ -23,7 +24,7 @@ export const AppDataSource =
       })
     : new DataSource({
         type: "postgres",
-        host: "localhost",
+        host: process.env.DB_HOST,
         port: 5432,
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
@@ -33,3 +34,4 @@ export const AppDataSource =
         entities: ["src/entities/*.ts"],
         migrations: ["src/migrations/*.ts"],
       });
+
